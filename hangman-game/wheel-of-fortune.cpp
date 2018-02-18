@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 //mendeteksi apakah jawaban sudah penuh atau belum
 int cek_end(char *board, int pos){
@@ -97,10 +97,10 @@ void command_B(char *answer, char *board, int *score, int turn, int command){
             if(turn!=2){
                 do{
                     fflush(stdin);
-                    r=to_upper(getch());
+                    r=to_upper(getchar());
                 }while(r<'A' || r>'Z');
             }else {//khusus untuk komputer
-                _sleep(1500);
+                usleep(1500 * 1000);
                 do{
                     r = answer[(rand()%str_length(answer))]; 
                 }while(r==' ');
@@ -156,8 +156,8 @@ void command_B(char *answer, char *board, int *score, int turn, int command){
             break;
     }
     if(turn==2)
-        _sleep(2000);
-    else getch();
+        usleep(2000 * 1000);
+    else getchar();
 }
 
 //pemilihan command A atau B
@@ -172,10 +172,10 @@ void choose_command(char *answer, char *board, int *score, int turn){
     if(turn!=2){
         do{
             fflush(stdin);
-            command = getch();
+            command = getchar();
         }while(command!='a' && command!='A' && command!='b' && command!='B');
     }else{ //khusus komputer
-        _sleep(1500);
+        usleep(1500 * 1000);
         if(rand()%10>2) command = 'B';
         else command = 'A';
     }
@@ -189,7 +189,7 @@ void choose_command(char *answer, char *board, int *score, int turn){
             if(turn!=2){
                 fflush(stdin);
                 gets(tebak);
-                getch();
+                getchar();
             }else{//khusus komputer
                 for(i=0; i<str_length(answer); i++)
                     if(board[i]!='_') tebak[i]=board[i];
@@ -200,7 +200,7 @@ void choose_command(char *answer, char *board, int *score, int turn){
                     }
                 tebak[i]='\0';
                 printf("%s", tebak);
-                _sleep(3000);
+                usleep(3000 * 1000);
             }
             if(str_cmp(tebak, answer)==0){
                 for(i=0; answer[i]!='\0'; i++)
@@ -215,7 +215,7 @@ void choose_command(char *answer, char *board, int *score, int turn){
             printf("Press X to stop:  ");
             do{
                 if(turn!=2){
-                    do{
+                    //do{
                         rand_num = rand()%8;
                         if(rand_num<3)      rand_num=1; //37.5%
                         else if(rand_num<4) rand_num=2; //12.5%
@@ -223,8 +223,9 @@ void choose_command(char *answer, char *board, int *score, int turn){
                         else if(rand_num<7) rand_num=4; //25%
                         else if(rand_num<8) rand_num=5; //12.5%
                         printf("\b%d", rand_num);
-                    }while(!kbhit());
-                    command = getch();
+                    //}while(!kbhit());
+                    // command = getchar();
+                    command='X';
                 }else{ //khusus komputer
                     for(i=0; i<100; i++){
                         rand_num = rand()%8;
@@ -234,7 +235,7 @@ void choose_command(char *answer, char *board, int *score, int turn){
                         else if(rand_num<7) rand_num=4; //25%
                         else if(rand_num<8) rand_num=5; //12.5%
                         printf("\b%d", rand_num);
-                        _sleep(10);
+                        usleep(10 * 1000);
                     }
                     command='X';
                 }
@@ -313,7 +314,7 @@ int main(){
                 next_turn(&turn);
                 system("cls");
                 printf("Wheel of Fortune\n");
-                printf("(C) 2008 by A Ninja @ Junior IT\n");
+                printf("(C) 2008 - 2018 by Junian Triajianto\n");
                 printf("===============================\n");
                 view_score(score);
                 printf("Question #%d:\n\n%s\n\n", 11-quest, question[rnd]);
@@ -333,11 +334,11 @@ int main(){
                 choose_command(answer[rnd], board, score, turn);
                 
                 //menentukan apakah pertanyaan sudah terjawab atau belum
-                if(end = cek_end(board, str_length(answer[rnd]))){
+                if(end == cek_end(board, str_length(answer[rnd]))){
                     printf("\nYou Got It...");
                     printf("\nThe answer of Question #%d is\n", 11-quest);
                     for(i=0; answer[rnd][i]!='\0'; i++) printf("%c ", board[i]);
-                    getch();
+                    getchar();
                 }
             }
             
@@ -352,7 +353,7 @@ int main(){
         printf("\n\nThe End\n");
         printf("\nWanna try again [Y/N]? ");
         do{
-            r=getch();
+            r=getchar();
         }while(r!='Y' && r!='y' && r!='n' && r!='N');
     }while(r=='y' || r=='Y');
     
