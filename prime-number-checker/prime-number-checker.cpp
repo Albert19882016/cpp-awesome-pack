@@ -1,20 +1,19 @@
 //Pengenal Bilangan Prima
 
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
 #include <math.h>
 
 char toUpper(char);
 
-main(){
+int main(){
   char r, isPrime;
   int n;
   do{
     system("cls");
     isPrime = 1;
-    printf("Pengenal Bilangan Prima\n");
-    printf("=======================\n\n");
+    printf("Prime Number Checker\n");
+    printf("====================\n\n");
     printf("Input N : ");
     scanf("%d", &n);
     for(int i=2; i<=sqrt(n); i++){
@@ -22,15 +21,16 @@ main(){
         isPrime = 0;
     }
     if(isPrime && n >= 2)
-      printf("\n%d adalah BILANGAN PRIMA", n);
+      printf("\n%d is a PRIME number", n);
     else
-      printf("\n%d adalah BUKAN BILANGAN PRIMA", n);
-    printf("\n\nIngin Mengulang [Y/N]? ");
+      printf("\n%d is NOT a prime number", n);
+    printf("\n\nTry again [Y/N]? ");
     do{
-      r = getch();
+      r = getchar();
       r = toUpper(r);
     }while(r != 'Y' && r != 'N');
   }while(r == 'Y');
+  return 0;
 }
 
 char toUpper(char x){
