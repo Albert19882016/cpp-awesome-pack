@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <conio.h>
 
 int main(){
   int n, half;
-  printf("Program Salib\n");
-  printf("===============\n\n");
+  printf("Cross Figure\n");
+  printf("============\n\n");
   printf("Input N: ");
   scanf("%d", &n);
   printf("\n");
@@ -24,6 +23,6 @@ int main(){
     }
     printf("\n\n");
   }
-  getch();
+  getchar();
   return 0;
 }

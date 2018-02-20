@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <conio.h>
 
 int main(){
   int n, x=1;
-  printf("Grafik Sinus\n");
-  printf("============\n\n");
+  printf("Sinus Graphic\n");
+  printf("=============\n\n");
   printf("Input N: ");
   scanf("%d", &n);
   printf("\n");
@@ -23,6 +22,6 @@ int main(){
     }
     printf("\n");
   }
-  getch();
+  getchar();
   return 0;
 }
